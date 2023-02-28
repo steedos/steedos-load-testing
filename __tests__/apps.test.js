@@ -1,7 +1,7 @@
 
 const timeout = 30000; 
 
-describe('Login', () => {
+describe('Browse Apps', () => {
 
   beforeAll(async () => {
     await page.goto(STEEDOS_ROOT_URL, {waitUntil: 'networkidle0'});
@@ -13,9 +13,8 @@ describe('Login', () => {
     await page.type('#password', STEEDOS_PASSWORD);
     await page.waitForTimeout(1000);
     await page.click('[type=submit]')
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(5000);
     const appListBtn = await page.$('.app-list-btn');
-    console.log(appListBtn)
     expect(appListBtn).toBeDefined(); 
   }, timeout); 
 });

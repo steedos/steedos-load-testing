@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="22.176">
+  <testsuite name="Browse Apps" errors="0" failures="0" skipped="0" timestamp="2023-02-28T08:31:47" time="12.063" tests="1">
+    <testcase classname="Browse Apps Login" name="Browse Apps Login" time="6.215">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login" errors="0" failures="0" skipped="0" timestamp="2023-02-28T08:31:47" time="21.74" tests="4">
+    <testcase classname="Login Login Check Title" name="Login Login Check Title" time="0.007">
+    </testcase>
+    <testcase classname="Login Login Check Header" name="Login Login Check Header" time="0.025">
+    </testcase>
+    <testcase classname="Login Login Login Failed" name="Login Login Login Failed" time="7.15">
+    </testcase>
+    <testcase classname="Login Login Login Success" name="Login Login Login Success" time="8.255">
+    </testcase>
+  </testsuite>
+</testsuites>

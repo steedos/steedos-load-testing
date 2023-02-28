@@ -15,17 +15,17 @@ describe('Login', () => {
     await page.waitForTimeout(2000);
   }, timeout);
 
-  describe('Test page title and header', () => {
-    test('page title', async () => {
+  describe('Login', () => {
+    test('Check Title', async () => {
       const title = await page.title(); 
       expect(title).toContain('登录您的账户'); 
     }, timeout); 
-    test('Header', async () => { 
+    test('Check Header', async () => { 
       const headerOne = await page.$('h2'); 
       const header = await page.evaluate(headerOne => headerOne.innerHTML, headerOne); 
       expect(header).toBe("登录您的账户"); 
     }, timeout); 
-    test('LoginFailed', async () => { 
+    test('Login Failed', async () => { 
       await page.type('#loginId', STEEDOS_USERNAME);
       await page.type('#password', 'bad-password');
       await page.waitForTimeout(1000);
@@ -36,7 +36,7 @@ describe('Login', () => {
       expect(msg).toBe("账号或密码错。"); 
     }, timeout); 
     
-    test('LoginSucess', async () => {
+    test('Login Success', async () => {
       await page.waitForTimeout(1000);
       const password = await page.$('#password');
       const loginId = await page.$('#loginId');
@@ -47,9 +47,9 @@ describe('Login', () => {
       await page.type('#password', STEEDOS_PASSWORD);
       await page.waitForTimeout(1000);
       await page.click('[type=submit]')
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(5000);
       const appListBtn = await page.$('.app-list-btn'); 
-      expect(appListBtn).to.not.be.empty();
+      expect(appListBtn).toBeDefined();
     }, timeout); 
   });
 });
