@@ -46,10 +46,15 @@ describe('Login And Approve', () => {
       el.value = 'engineering';
     })
 
+    // 有可能没有.nextStepUsers标签，需要判断
     await page.waitForTimeout(10000);
-    await page.click('.nextStepUsers');
+    const nextStepUsers = await page.$('.nextStepUsers'); 
+    console.log(nextStepUsers);
+    // if(nextStepUsers == null)
 
-    
+   
+
+
     await page.waitForTimeout(3000);
     await page.click('.user-name');
     await page.waitForTimeout(3000);
