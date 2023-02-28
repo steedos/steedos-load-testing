@@ -11,8 +11,8 @@ const timeout = 30000;
 describe('Login', () => {
   
   beforeAll(async () => {
-    await page.goto(STEEDOS_ROOT_URL, {waitUntil: 'networkidle0'});
-    await page.waitForTimeout(2000);
+    await page.goto(STEEDOS_ROOT_URL);
+    await page.waitForSelector('#loginId');
   }, timeout);
 
   describe('Login', () => {
@@ -28,27 +28,23 @@ describe('Login', () => {
     test('Login Failed', async () => { 
       await page.type('#loginId', STEEDOS_USERNAME);
       await page.type('#password', 'bad-password');
-      await page.waitForTimeout(1000);
       await page.click('[type=submit]')
-      await page.waitForTimeout(1000);
+      await page.waitForSelector('#client-snackbar');
       const snackbar = await page.$('#client-snackbar');
       const msg = await page.evaluate(snackbar => snackbar.innerText, snackbar); 
       expect(msg).toBe("账号或密码错。"); 
     }, timeout); 
     
     test('Login Success', async () => {
-      await page.waitForTimeout(1000);
       const password = await page.$('#password');
       const loginId = await page.$('#loginId');
       await page.evaluate(() => loginId.value = "", loginId); 
       await page.type('#loginId', STEEDOS_USERNAME);
-      await page.waitForTimeout(1000);
       await page.evaluate(() => password.value = "", password); 
       await page.type('#password', STEEDOS_PASSWORD);
-      await page.waitForTimeout(1000);
       await page.click('[type=submit]')
-      await page.waitForTimeout(5000);
-      const appListBtn = await page.$('.app-list-btn'); 
+      await page.waitForSelector('.steedos-header-container');
+      const appListBtn = await page.$('.steedos-header-container'); 
       expect(appListBtn).toBeDefined();
     }, timeout); 
   });
