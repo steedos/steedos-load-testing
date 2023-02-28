@@ -2,8 +2,6 @@ require('dotenv-flow').config({
   path: __dirname
 });
 
-console.log(__dirname);
-console.log(process.env);
 module.exports = {
   preset: "jest-puppeteer",
   globals: {
