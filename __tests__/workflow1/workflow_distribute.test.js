@@ -2,7 +2,7 @@
  * @Author: sunhaolin@hotoa.com
  * @Date: 2023-02-28 11:56:46
  * @LastEditors: sunhaolin@hotoa.com
- * @LastEditTime: 2023-02-28 18:13:44
+ * @LastEditTime: 2023-02-28 18:44:16
  * @Description: 
  */
 const puppeteer = require('puppeteer')
@@ -13,7 +13,7 @@ const timeout = 300000;
 test('page title', async () => {
     const browser = await puppeteer.launch(require('../../jest-puppeteer.config').launch)
     const promises = []
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < 3; index++) {
         promises.push(login(browser))
     }
     await Promise.all(promises)
@@ -49,7 +49,7 @@ async function login(browser) {
     //     let elements = await page.$x(xPath);
     //     elements[0].click();
     // } catch (error) {}
-    await new Promise(r => setTimeout(r, 3000));
+    // await new Promise(r => setTimeout(r, 3000));
 
     // await distribute(page);
     await page.goto(`${STEEDOS_ROOT_URL}/workflow`)
