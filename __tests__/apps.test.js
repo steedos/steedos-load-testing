@@ -26,11 +26,10 @@ describe('Browse Apps', () => {
 
 
     // 设置开启多少个浏览器
-    var round_apps = 50;
-    for(var i = 0; i < round_apps; i ++ ) {
+    var apps_num = 100;
+    for(var i = 0; i < apps_num; i ++ ) {
       page = await browser.newPage();
       await page.goto(STEEDOS_ROOT_URL);
-      await page.waitForNavigation();
       await page.waitForSelector('.steedos-header-container');
     }
     await page.waitForSelector('.steedos-header-container2', {timeout});
