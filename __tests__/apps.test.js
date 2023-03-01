@@ -28,6 +28,7 @@ describe('Browse Apps', () => {
     // 设置开启多少个浏览器
     var apps_num = 100;
     for(var i = 0; i < apps_num; i ++ ) {
+      console.log( '当前浏览器数量：' + i );
       page = await browser.newPage();
       await page.goto(STEEDOS_ROOT_URL);
       await page.waitForSelector('.steedos-header-container');
