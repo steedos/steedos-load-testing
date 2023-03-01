@@ -11,45 +11,41 @@ const timeout = 30000;
 describe('Login', () => {
   
   beforeAll(async () => {
-    await page.goto(STEEDOS_ROOT_URL, {waitUntil: 'networkidle0'});
-    await page.waitForTimeout(2000);
+    await page.goto(STEEDOS_ROOT_URL);
+    await page.waitForSelector('#loginId');
   }, timeout);
 
-  describe('Test page title and header', () => {
-    test('page title', async () => {
+  describe('Login', () => {
+    test('Check Title', async () => {
       const title = await page.title(); 
       expect(title).toContain('登录您的账户'); 
     }, timeout); 
-    test('Header', async () => { 
+    test('Check Header', async () => { 
       const headerOne = await page.$('h2'); 
       const header = await page.evaluate(headerOne => headerOne.innerHTML, headerOne); 
       expect(header).toBe("登录您的账户"); 
     }, timeout); 
-    test('LoginFailed', async () => { 
+    test('Login Failed', async () => { 
       await page.type('#loginId', STEEDOS_USERNAME);
       await page.type('#password', 'bad-password');
-      await page.waitForTimeout(1000);
       await page.click('[type=submit]')
-      await page.waitForTimeout(1000);
+      await page.waitForSelector('#client-snackbar');
       const snackbar = await page.$('#client-snackbar');
       const msg = await page.evaluate(snackbar => snackbar.innerText, snackbar); 
       expect(msg).toBe("账号或密码错。"); 
     }, timeout); 
     
-    test('LoginSucess', async () => {
-      await page.waitForTimeout(1000);
+    test('Login Success', async () => {
       const password = await page.$('#password');
       const loginId = await page.$('#loginId');
       await page.evaluate(() => loginId.value = "", loginId); 
       await page.type('#loginId', STEEDOS_USERNAME);
-      await page.waitForTimeout(1000);
       await page.evaluate(() => password.value = "", password); 
       await page.type('#password', STEEDOS_PASSWORD);
-      await page.waitForTimeout(1000);
       await page.click('[type=submit]')
-      await page.waitForTimeout(1000);
-      const appListBtn = await page.$('.app-list-btn'); 
-      expect(appListBtn).to.not.be.empty();
+      await page.waitForSelector('.steedos-header-container');
+      const appListBtn = await page.$('.steedos-header-container'); 
+      expect(appListBtn).toBeDefined();
     }, timeout); 
   });
 });
