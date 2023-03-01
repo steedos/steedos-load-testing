@@ -1,5 +1,7 @@
 const timeout = 300000; 
 
+
+// 如果网络不好，会出现问题
 describe('Login And Approve', () => {
 
   beforeAll(async () => {
@@ -28,41 +30,28 @@ describe('Login And Approve', () => {
   }, timeout); 
 
   // 新建审批单
+  // test('new flow', async () => {
+  //   await page.click(['title="新建"']);
+  //   await page.waitForTimeout(5000);
+  //   await page.click(['title="test"']);
+  // })
 
   // 审核审批单
-  test('approving', async () => { 
-    await page.waitForTimeout(3000);
-    // await page.click('[title="待审核"]');
-    // await page.waitForTimeout(2000);
-    await page.click('.odd');
-    await page.waitForTimeout(3000);
-
-    await page.type('#suggestion', '同意');
-
-    await page.waitForTimeout(3000);
-
-
-    await page.$eval("[name=project_type]", (el) => {
-      el.value = 'engineering';
-    })
-
-    // 有可能没有.nextStepUsers标签，需要判断
-    await page.waitForTimeout(10000);
-    const nextStepUsers = await page.$('.nextStepUsers'); 
-    console.log(nextStepUsers);
-    // if(nextStepUsers == null)
-
-   
-
-
-    await page.waitForTimeout(3000);
-    await page.click('.user-name');
-    await page.waitForTimeout(3000);
-    await page.click('[title = "确认"]');
-    await page.waitForTimeout(3000);
-    await page.click('[title = "提交"]');
-    await page.waitForTimeout(50000);
-  }, timeout);
+  var round = 10;
+  for( var i = 0; i < round; i ++ ) {
+    test('approving', async () => { 
+      await page.waitForTimeout(5000);
+      await page.click('.odd');
+      await page.waitForTimeout(3000);
+      // 文本传值 eval
+      await page.$eval('#suggestion', (el) => {
+          el.value = '同意';
+      })
+      await page.waitForTimeout(3000);
+      await page.click('[title = "发送"]');
+    }, timeout);
+  }
+  
   
   
 });
