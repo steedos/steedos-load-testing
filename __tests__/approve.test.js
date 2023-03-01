@@ -10,7 +10,7 @@ describe('Login And Approve', () => {
   }, timeout);
   
   test('Login', async () => { 
-    await page.type('#loginId', STEEDOS_USERNAME1);
+    await page.type('#loginId', STEEDOS_USERNAME);
     await page.type('#password', STEEDOS_PASSWORD);
     await page.waitForTimeout(1000);
     await page.click('[type=submit]')
