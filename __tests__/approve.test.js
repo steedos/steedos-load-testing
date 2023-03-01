@@ -10,7 +10,7 @@ describe('Login And Approve', () => {
   }, timeout);
   
   test('Login', async () => { 
-    await page.type('#loginId', STEEDOS_USERNAME);
+    await page.type('#loginId', STEEDOS_USERNAME1);
     await page.type('#password', STEEDOS_PASSWORD);
     await page.waitForTimeout(1000);
     await page.click('[type=submit]')
@@ -30,18 +30,13 @@ describe('Login And Approve', () => {
   }, timeout); 
 
   // 新建审批单
-  // test('new flow', async () => {
-  //   await page.click(['title="新建"']);
-  //   await page.waitForTimeout(5000);
-  //   await page.click(['title="test"']);
-  // })
 
   // 审核审批单
   var round = 10;
   for( var i = 0; i < round; i ++ ) {
     test('approving', async () => { 
       await page.waitForTimeout(5000);
-      await page.click('.odd');
+      await page.click('.odd'); 
       await page.waitForTimeout(3000);
       // 文本传值 eval
       await page.$eval('#suggestion', (el) => {
