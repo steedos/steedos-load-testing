@@ -7,7 +7,6 @@ describe('Browse Apps', () => {
   }, timeout);
 
   test('Login', async () => {
-    const page = await browser.newPage();
     await page.goto(STEEDOS_ROOT_URL);
     await page.waitForSelector('#loginId');
     const password = await page.$('#password');
@@ -29,7 +28,6 @@ describe('Browse Apps', () => {
     await page.waitForSelector('.steedos-header-container');
     await page.waitForSelector('.steedos-header-container2', {timeout});
     const appListBtn = await page.$('.steedos-header-container');
-    console.log(appListBtn)
     expect(appListBtn).toBeDefined();
   }, timeout); 
 
