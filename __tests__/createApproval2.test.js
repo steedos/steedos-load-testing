@@ -2,7 +2,7 @@
  * @Author: 何夏鹏 hexiapeng@steedos.com
  * @Date: 2023-03-05 11:47:37
  * @LastEditors: 何夏鹏 hexiapeng@steedos.com
- * @LastEditTime: 2023-03-05 18:33:46
+ * @LastEditTime: 2023-03-05 18:51:44
  * @FilePath: /steedos-load-testing/__tests__/qhd-1.21/createApprove.test.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,10 +17,18 @@ describe('Login And Approve', () => {
 
   test('Login', async () => {
     
-    let num = 99;
+    let num = 3;
     for( let i = 0; i < num; i ++ ) {
+        // await setTimeout(async function(){
+        //     await console.log( '--------当前浏览器数量--------:' + (i + 1) + "/" + num);
+        //     await page.waitForTimeout(5000); // 等待加载
+        //     await gotoWorkflow();
+        //     await createNewFile();
+        //     page = await browser.newPage();
+        //     await page.goto(STEEDOS_OUTBOX_URL);
+        // },100);
         await console.log( '--------当前浏览器数量--------:' + (i + 1) + "/" + num);
-        await page.waitForTimeout(5000); // 等待记载
+        await page.waitForTimeout(5000); // 等待加载
         await gotoWorkflow();
         await createNewFile();
         page = await browser.newPage();
