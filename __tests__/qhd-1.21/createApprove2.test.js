@@ -17,11 +17,10 @@ describe('Login And Approve', () => {
 
   test('Login', async () => {
     
-    let num = 99;
+    let num = 20;
     for( let i = 0; i < num; i ++ ) {
-        await gotoWorkflow();
-        await createNewFile();
-        await console.log( '--------当前浏览器数量--------:' + (i + 1) + "/" + num);
+        createNewFile();
+        console.log( '--------当前浏览器数量--------:' + (i + 1) + "/" + num);
     }
     await page.waitForSelector('.steedos99999', {timeout});
   }, timeout); 
@@ -34,7 +33,7 @@ async function Login(){
     await page.waitForSelector('#at-field-username_and_email');
     await page.type('#at-field-username_and_email', STEEDOS_USERNAME);
     await page.type('#at-field-password', STEEDOS_PASSWORD);
-    await click_delay('[type=submit]', 1000);
+    await click_delay(page, '[type=submit]', 1000);
 }
 
 async function gotoWorkflow(){
@@ -43,23 +42,25 @@ async function gotoWorkflow(){
 }
 
 async function createNewFile(){
+    var page = await browser.newPage();
+    await page.goto(process.env.STEEDOS_INBOX_URL);
     await page.waitForSelector('.instance_new');
-    await click_delay('.instance_new', 1000);
-    await click_delay('[data-flow="1ff12bc17e235503aff2c4c9"]');
-    await write_delay('[name="发文类型"]', '政务发文');
-    await write_delay('[name="主送"]', '测试');
-    await write_delay('[title="标题"]', '测试');
-    await click_delay('[value="a005e57c-ecf0-4aa0-ac8d-a90a76c0b56f"]');
-    await click_delay('.selectUser-placeholder'); // 点击选择秘书 
-    await click_delay('#EayxjWDetqaP8BjP6'); // 选人 王海滨
-    await click_delay('.fa-paper-plane'); // 发送
-    page = await browser.newPage();
-    await page.goto(STEEDOS_ROOT_URL);
+    await click_delay(page, '.instance_new', 1000);
+    await click_delay(page, '[data-flow="1ff12bc17e235503aff2c4c9"]',5000);
+    await write_delay(page, '[name="发文类型"]', '政务发文');
+    await write_delay(page, '[name="主送"]', '测试');
+    await write_delay(page, '[title="标题"]', '测试');
+    await click_delay(page, '[value="a005e57c-ecf0-4aa0-ac8d-a90a76c0b56f"]');
+    await click_delay(page, '.selectUser-placeholder'); // 点击选择秘书 
+    await click_delay(page, '#EayxjWDetqaP8BjP6'); // 选人 王海滨
+    await click_delay(page, '#instance_submit'); // 发送
+    // page = await browser.newPage();
+    // await page.goto(STEEDOS_ROOT_URL);
     await page.waitForSelector('[data-appid="workflow"]');
 }
 
 // 延时后点击 
-async function click_delay(str, time = 3000){ 
+async function click_delay(page, str, time = 3000){ 
     await page.waitForTimeout(time);
     await page.$eval(str, (el) => {
         el.click();
@@ -67,7 +68,7 @@ async function click_delay(str, time = 3000){
   };
     
 // 延时后选择和填充
-async function write_delay(str, content = 'test', time = 3000){
+async function write_delay(page, str, content = 'test', time = 10000){
     await page.waitForTimeout(time);
     await page.$eval(str, (el, fillContent) => {
         el.value = fillContent;
