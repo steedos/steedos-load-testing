@@ -2,7 +2,7 @@
  * @Author: 何夏鹏 hexiapeng@steedos.com
  * @Date: 2023-03-05 11:47:37
  * @LastEditors: 何夏鹏 hexiapeng@steedos.com
- * @LastEditTime: 2023-03-05 16:22:56
+ * @LastEditTime: 2023-03-05 16:28:36
  * @FilePath: /steedos-load-testing/__tests__/qhd-1.21/createApprove.test.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -60,21 +60,19 @@ async function createNewFile(){
 
 // 延时后点击
 async function click_delay(str, time = 3000){ 
-    //   await page.waitForSelector(str);
-      await page.waitForTimeout(time);
-      await page.$eval(str, (el) => {
-            el.click();
-        });
-    };
+    await page.waitForTimeout(time);
+    await page.$eval(str, (el) => {
+        el.click();
+    });
+};
     
-    /* 
-      延时后可以进行 选择\写入
-      str 选择元素
-      value 传入的值
-      time 延时时间，可以不传
-    */
+/* 
+    延时后可以进行 选择\写入
+    str 选择元素
+    content 传入的值
+    time 延时时间，可以不传
+*/
 async function write_delay(str, content, time = 3000){
-    // await page.waitForSelector(str);
     await page.waitForTimeout(time);
     await page.$eval(str, (el, fillContent) => {
     el.value = fillContent;
