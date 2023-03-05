@@ -1,5 +1,5 @@
 
-const timeout = 3000000; 
+const timeout = 6000000; 
 
 describe('Browse Apps', () => {
 
@@ -26,8 +26,9 @@ describe('Browse Apps', () => {
 
 
     // 设置开启多少个浏览器
-    var apps_num = 50;
+    var apps_num = 200;
     for(var i = 0; i < apps_num; i++ ) {
+      console.log( '当前浏览器数量：' + i );
       page = await browser.newPage();
       await page.goto(process.env.STEEDOS_OUTBOX_URL);
       // await page.waitForSelector('.steedos-header-container');
